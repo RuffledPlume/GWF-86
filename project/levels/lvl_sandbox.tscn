@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://reb10t3agtfp"]
+
+[ext_resource type="PackedScene" uid="uid://bfu3urw4e1djq" path="res://prefabs/pf_player.tscn" id="1_p4efw"]
+[ext_resource type="LightmapGIData" uid="uid://bpg4d5314ober" path="res://levels/lightmaps/sandbox.lmbake" id="2_75r4t"]
+[ext_resource type="PackedScene" uid="uid://ctlsostfq5ndw" path="res://prefabs/pf_basic_cube.tscn" id="3_vfjr8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_85hcc"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_7he1i"]
+sky_material = SubResource("ProceduralSkyMaterial_85hcc")
+
+[sub_resource type="Environment" id="Environment_0glgv"]
+background_mode = 2
+sky = SubResource("Sky_7he1i")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Sandbox" type="Node3D"]
+
+[node name="Pf_Player" parent="." instance=ExtResource("1_p4efw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38066244, 0)
+
+[node name="Enviorment" type="Node3D" parent="."]
+
+[node name="LightmapGI" type="LightmapGI" parent="Enviorment"]
+quality = 3
+supersampling = true
+directional = true
+shadowmask_mode = 1
+generate_probes_subdiv = 3
+light_data = ExtResource("2_75r4t")
+
+[node name="pf_basic_cube" parent="Enviorment" instance=ExtResource("3_vfjr8")]
+transform = Transform3D(15.914506, 0, 0, 0, 1, 0, 0, 0, 16.042599, 0, -0.5027902, 0)
+
+[node name="pf_basic_cube2" parent="Enviorment" instance=ExtResource("3_vfjr8")]
+transform = Transform3D(0.7186127, 0, 0, 0, 4.5043564, 0, 0, 0, 16.042599, -8.533203, 1.9547627, 0)
+
+[node name="pf_basic_cube3" parent="Enviorment" instance=ExtResource("3_vfjr8")]
+transform = Transform3D(-3.1411556e-08, 0, -16.042599, 0, 4.504356, 0, 0.7186126, 0, -7.0124423e-07, -0.5332031, 1.9547627, -8)
+
+[node name="pf_basic_cube4" parent="Enviorment" instance=ExtResource("3_vfjr8")]
+transform = Transform3D(-0.7186125, 0, 5.3237756e-07, 0, 1.8981689, 0, -6.2823105e-08, 0, -6.0896897, 4.0264463, 0.4919026, 1.9394321)
+
+[node name="pf_basic_cube5" parent="Enviorment" instance=ExtResource("3_vfjr8")]
+transform = Transform3D(9.423465e-08, 0, 6.0896897, 0, 1.8981689, 0, -0.71861243, 0, 7.9856625e-07, -0.3539996, 0.49190307, -2.7367468)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Enviorment"]
+environment = SubResource("Environment_0glgv")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Enviorment"]
+transform = Transform3D(0.6421993, -0.66384125, 0.38326874, 4.8747356e-08, 0.49999985, 0.8660255, -0.7665377, -0.5561609, 0.3210996, 0, 3.1708019, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.7071068, -0.5652105, 0.42489672, 0, 0.6008945, 0.7993283, -0.7071068, -0.5652105, 0.42489666, 7.8408737, 11.374696, 7.840873)
+size = 14.431703
