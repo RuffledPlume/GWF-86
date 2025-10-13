@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://8eo86bfy6elh"]
+
+[ext_resource type="Script" uid="uid://brh2l8ouli1ws" path="res://scripts/elevator.gd" id="1_j4e5o"]
+[ext_resource type="Texture2D" uid="uid://dltgi5ef4uowh" path="res://textures/p_purple.png" id="2_p4dfj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0jlph"]
+albedo_texture = ExtResource("2_p4dfj")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_ghrwn"]
+material = SubResource("StandardMaterial3D_0jlph")
+size = Vector3(2, 0.1, 2)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_frrns"]
+data = PackedVector3Array(-1, 0.049999997, 1, 1, 0.049999997, 1, -1, -0.049999997, 1, 1, 0.049999997, 1, 1, -0.049999997, 1, -1, -0.049999997, 1, 1, 0.049999997, -1, -1, 0.049999997, -1, 1, -0.049999997, -1, -1, 0.049999997, -1, -1, -0.049999997, -1, 1, -0.049999997, -1, 1, 0.049999997, 1, 1, 0.049999997, -1, 1, -0.049999997, 1, 1, 0.049999997, -1, 1, -0.049999997, -1, 1, -0.049999997, 1, -1, 0.049999997, -1, -1, 0.049999997, 1, -1, -0.049999997, -1, -1, 0.049999997, 1, -1, -0.049999997, 1, -1, -0.049999997, -1, 1, 0.049999997, 1, -1, 0.049999997, 1, 1, 0.049999997, -1, -1, 0.049999997, 1, -1, 0.049999997, -1, 1, 0.049999997, -1, -1, -0.049999997, 1, 1, -0.049999997, 1, -1, -0.049999997, -1, 1, -0.049999997, 1, 1, -0.049999997, -1, -1, -0.049999997, -1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_frrns"]
+
+[node name="Elevator" type="Node3D"]
+script = ExtResource("1_j4e5o")
+
+[node name="Platform" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ghrwn")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platform"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_frrns")
+
+[node name="MovePoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 1.5, 0)
+shape = SubResource("BoxShape3D_frrns")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

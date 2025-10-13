@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://reb10t3agtfp"]
+[gd_scene load_steps=20 format=3 uid="uid://reb10t3agtfp"]
 
 [ext_resource type="PackedScene" uid="uid://bfu3urw4e1djq" path="res://prefabs/pf_player.tscn" id="1_p4efw"]
 [ext_resource type="LightmapGIData" uid="uid://bpg4d5314ober" path="res://levels/lightmaps/sandbox.lmbake" id="2_75r4t"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bjbmq3tun7i37" path="res://textures/p_dark.png" id="4_75r4t"]
 [ext_resource type="Texture2D" uid="uid://k5egrbtqqwyr" path="res://textures/p_orange.png" id="5_vfjr8"]
 [ext_resource type="Texture2D" uid="uid://dvac1yha00r8b" path="res://textures/p_green.png" id="6_sceuq"]
+[ext_resource type="PackedScene" uid="uid://8eo86bfy6elh" path="res://prefabs/elevator.tscn" id="7_jofgg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_85hcc"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -24,6 +25,96 @@ glow_enabled = true
 albedo_texture = ExtResource("4_75r4t")
 uv1_triplanar = true
 
+[sub_resource type="Shader" id="Shader_jofgg"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.5.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;
+
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
+uniform ivec2 albedo_texture_size;
+uniform float point_size : hint_range(0.1, 128.0, 0.1);
+
+uniform float roughness : hint_range(0.0, 1.0);
+uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, repeat_enable;
+
+uniform float specular : hint_range(0.0, 1.0, 0.01);
+uniform float metallic : hint_range(0.0, 1.0, 0.01);
+varying vec3 uv1_triplanar_pos;
+
+uniform float uv1_blend_sharpness : hint_range(0.0, 150.0, 0.001);
+varying vec3 uv1_power_normal;
+
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+void vertex() {
+	vec3 normal = NORMAL;
+
+	TANGENT = vec3(0.0, 0.0, -1.0) * abs(normal.x);
+	TANGENT += vec3(1.0, 0.0, 0.0) * abs(normal.y);
+	TANGENT += vec3(1.0, 0.0, 0.0) * abs(normal.z);
+	TANGENT = normalize(TANGENT);
+
+	BINORMAL = vec3(0.0, 1.0, 0.0) * abs(normal.x);
+	BINORMAL += vec3(0.0, 0.0, -1.0) * abs(normal.y);
+	BINORMAL += vec3(0.0, 1.0, 0.0) * abs(normal.z);
+	BINORMAL = normalize(BINORMAL);
+
+	// UV1 Triplanar: Enabled
+	uv1_power_normal = pow(abs(NORMAL), vec3(uv1_blend_sharpness));
+	uv1_triplanar_pos = VERTEX * uv1_scale + uv1_offset;
+	uv1_power_normal /= dot(uv1_power_normal, vec3(1.0));
+	uv1_triplanar_pos *= vec3(1.0, -1.0, 1.0);
+}
+
+vec4 triplanar_texture(sampler2D p_sampler, vec3 p_weights, vec3 p_triplanar_pos) {
+	vec4 samp = vec4(0.0);
+	samp += texture(p_sampler, p_triplanar_pos.xy) * p_weights.z;
+	samp += texture(p_sampler, p_triplanar_pos.xz) * p_weights.y;
+	samp += texture(p_sampler, p_triplanar_pos.zy * vec2(-1.0, 1.0)) * p_weights.x;
+	return samp;
+}
+
+void fragment() {
+	vec4 albedo_tex = triplanar_texture(texture_albedo, uv1_power_normal, uv1_triplanar_pos);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+
+	float metallic_tex = dot(triplanar_texture(texture_metallic, uv1_power_normal, uv1_triplanar_pos), metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	SPECULAR = specular;
+
+	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
+	float roughness_tex = dot(triplanar_texture(texture_roughness, uv1_power_normal, uv1_triplanar_pos), roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+}
+"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mrbwa"]
+load_path = "res://.godot/imported/p_orange.png-40acb0248db74195073656054897250f.s3tc.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h15ai"]
+render_priority = 0
+shader = SubResource("Shader_jofgg")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = SubResource("CompressedTexture2D_mrbwa")
+shader_parameter/albedo_texture_size = Vector2i(1024, 1024)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sceuq"]
 albedo_texture = ExtResource("5_vfjr8")
 uv1_triplanar = true
@@ -39,10 +130,14 @@ uv1_triplanar = true
 albedo_texture = ExtResource("5_vfjr8")
 uv1_triplanar = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p8w46"]
+albedo_texture = ExtResource("5_vfjr8")
+uv1_triplanar = true
+
 [node name="Sandbox" type="Node3D"]
 
-[node name="Pf_Player" parent="." instance=ExtResource("1_p4efw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9, 0.48066244, -33.8)
+[node name="Pf_Player" parent="." groups=["Player"] instance=ExtResource("1_p4efw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.45, 0.48066244, -34.899998)
 
 [node name="Enviorment" type="Node3D" parent="."]
 
@@ -77,7 +172,7 @@ transform = Transform3D(0.6421993, -0.66384125, 0.38326874, 4.8747356e-08, 0.499
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.7071068, -0.29883626, 0.6408564, 0, 0.9063078, 0.42261827, -0.7071068, -0.29883626, 0.6408564, 14.433952, 10.95445, -24.06605)
+transform = Transform3D(0.7071068, -0.29883626, 0.6408564, 0, 0.9063078, 0.42261827, -0.7071068, -0.29883626, 0.6408564, 11.933954, 10.95445, -24.06605)
 projection = 1
 size = 15.0
 near = 0.001
@@ -107,7 +202,7 @@ size = Vector3(14, 10.8, 10)
 
 [node name="Obstacle" type="CSGBox3D" parent="B01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-material_override = SubResource("StandardMaterial3D_sceuq")
+material_override = SubResource("ShaderMaterial_h15ai")
 size = Vector3(1, 2, 4)
 
 [node name="Obstacle2" type="CSGBox3D" parent="B01"]
@@ -323,3 +418,85 @@ material_override = SubResource("StandardMaterial3D_mrbwa")
 radius = 2.5
 height = 10.900001
 sides = 6
+
+[node name="B04" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104.7, 0, -32)
+
+[node name="Ground01" type="CSGBox3D" parent="B04"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.8000002, -5.4)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(16, 8.6, 20)
+
+[node name="Ground02" type="CSGBox3D" parent="B04"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.050003, 2.2999997, -8.275002)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(5.9, 3.7, 14.25)
+
+[node name="Ground04" type="CSGBox3D" parent="B04"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.025001526, -1.9749999, -18.349998)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(5.9, 12.25, 15.95)
+
+[node name="Ground03" type="CSGBox3D" parent="B04"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, -3.8000002, -5.4000015)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(3, 8.6, 6)
+
+[node name="Obstacle" type="CSGBox3D" parent="B04"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05000031, 1.5000001, -5.4000015)
+material_override = SubResource("StandardMaterial3D_p8w46")
+size = Vector3(4, 2, 2)
+
+[node name="Obstacle2" type="CSGBox3D" parent="B04"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.15, 1.5000001, -5.4000015)
+material_override = SubResource("StandardMaterial3D_p8w46")
+size = Vector3(4, 2, 2)
+
+[node name="Obstacle3" type="CSGBox3D" parent="B04"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.300003, 1.5000001, -5.4000015)
+material_override = SubResource("StandardMaterial3D_p8w46")
+size = Vector3(4, 2, 2)
+
+[node name="FragmentBase" type="Node3D" parent="B04"]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, 10, 0.55000013, -18.300003)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="B04/FragmentBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 0)
+material_override = SubResource("StandardMaterial3D_jofgg")
+radius = 2.0
+sides = 6
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="B04/FragmentBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8500004, 0)
+material_override = SubResource("StandardMaterial3D_mrbwa")
+radius = 2.5
+height = 10.900001
+sides = 6
+
+[node name="ElectricDischarge" type="CSGCylinder3D" parent="B04"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.050003, 5.7875, -2.7999992)
+radius = 0.25
+height = 3.275
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="B04/ElectricDischarge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4000001, 0)
+outer_radius = 0.8
+
+[node name="CSGTorus3D2" type="CSGTorus3D" parent="B04/ElectricDischarge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8000002, 0)
+outer_radius = 0.8
+
+[node name="Elevator" parent="." instance=ExtResource("7_jofgg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.45, 0.5500001, -35.95)
+
+[node name="MovePoint" parent="Elevator" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65, 0)
+
+[node name="Elevator2" parent="." instance=ExtResource("7_jofgg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104.15, 0.5, -45.9)
+
+[node name="CollisionShape3D" parent="Elevator2/Area3D" index="0"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 2.025, 0)
+
+[editable path="Elevator"]
+[editable path="Elevator2"]
