@@ -1,9 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://ctlsostfq5ndw"]
+[gd_scene load_steps=5 format=3 uid="uid://ctlsostfq5ndw"]
+
+[ext_resource type="Texture2D" uid="uid://bjbmq3tun7i37" path="res://textures/p_dark.png" id="1_klvks"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_my82y"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_egwjc"]
+albedo_texture = ExtResource("1_klvks")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
 [sub_resource type="BoxMesh" id="BoxMesh_klvks"]
 lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_egwjc")
 add_uv2 = true
 
 [node name="pf_basic_cube" type="Node3D"]

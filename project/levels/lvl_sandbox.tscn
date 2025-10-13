@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://reb10t3agtfp"]
+[gd_scene load_steps=15 format=3 uid="uid://reb10t3agtfp"]
 
 [ext_resource type="PackedScene" uid="uid://bfu3urw4e1djq" path="res://prefabs/pf_player.tscn" id="1_p4efw"]
 [ext_resource type="LightmapGIData" uid="uid://bpg4d5314ober" path="res://levels/lightmaps/sandbox.lmbake" id="2_75r4t"]
 [ext_resource type="PackedScene" uid="uid://ctlsostfq5ndw" path="res://prefabs/pf_basic_cube.tscn" id="3_vfjr8"]
+[ext_resource type="Texture2D" uid="uid://bjbmq3tun7i37" path="res://textures/p_dark.png" id="4_75r4t"]
+[ext_resource type="Texture2D" uid="uid://k5egrbtqqwyr" path="res://textures/p_orange.png" id="5_vfjr8"]
+[ext_resource type="Texture2D" uid="uid://dvac1yha00r8b" path="res://textures/p_green.png" id="6_sceuq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_85hcc"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -17,10 +20,29 @@ sky = SubResource("Sky_7he1i")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vfjr8"]
+albedo_texture = ExtResource("4_75r4t")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sceuq"]
+albedo_texture = ExtResource("5_vfjr8")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jofgg"]
+albedo_texture = ExtResource("6_sceuq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mrbwa"]
+albedo_texture = ExtResource("4_75r4t")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h15ai"]
+albedo_texture = ExtResource("5_vfjr8")
+uv1_triplanar = true
+
 [node name="Sandbox" type="Node3D"]
 
 [node name="Pf_Player" parent="." instance=ExtResource("1_p4efw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38066244, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9, 0.48066244, -33.8)
 
 [node name="Enviorment" type="Node3D" parent="."]
 
@@ -55,5 +77,249 @@ transform = Transform3D(0.6421993, -0.66384125, 0.38326874, 4.8747356e-08, 0.499
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.7071068, -0.5652105, 0.42489672, 0, 0.6008945, 0.7993283, -0.7071068, -0.5652105, 0.42489666, 7.8408737, 11.374696, 7.840873)
-size = 14.431703
+transform = Transform3D(0.7071068, -0.29883626, 0.6408564, 0, 0.9063078, 0.42261827, -0.7071068, -0.29883626, 0.6408564, 14.433952, 10.95445, -24.06605)
+projection = 1
+size = 15.0
+near = 0.001
+
+[node name="B01" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -32)
+
+[node name="Ground01" type="CSGBox3D" parent="B01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.8000002, 0)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(10, 8.6, 10)
+
+[node name="Ground02" type="CSGBox3D" parent="B01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.0500002, -10)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(14, 8.5, 10)
+
+[node name="Ground04" type="CSGBox3D" parent="B01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.3, -4.3, -17.2)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(2.6000001, 9.6, 24.4)
+
+[node name="Ground03" type="CSGBox3D" parent="B01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.4, -24.400002)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(14, 10.8, 10)
+
+[node name="Obstacle" type="CSGBox3D" parent="B01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+material_override = SubResource("StandardMaterial3D_sceuq")
+size = Vector3(1, 2, 4)
+
+[node name="Obstacle2" type="CSGBox3D" parent="B01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9, 2.9, -7.799999)
+material_override = SubResource("StandardMaterial3D_sceuq")
+size = Vector3(1.5, 1.5, 1.5)
+
+[node name="Obstacle3" type="CSGBox3D" parent="B01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7, 2.8999996, -7.799999)
+material_override = SubResource("StandardMaterial3D_sceuq")
+size = Vector3(1.5, 1.5, 1.5)
+
+[node name="Obstacle4" type="CSGBox3D" parent="B01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 2.9, -7.799999)
+material_override = SubResource("StandardMaterial3D_sceuq")
+size = Vector3(1.5, 1.5, 1.5)
+
+[node name="Obstacle5" type="CSGBox3D" parent="B01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2, -14.599998)
+material_override = SubResource("StandardMaterial3D_sceuq")
+size = Vector3(3, 2, 1)
+
+[node name="Obstacle6" type="CSGBox3D" parent="B01"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 3.4, -20.899998)
+material_override = SubResource("StandardMaterial3D_sceuq")
+size = Vector3(3, 2, 1)
+
+[node name="Obstacle7" type="CSGBox3D" parent="B01"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 3.4, -27.899998)
+material_override = SubResource("StandardMaterial3D_sceuq")
+size = Vector3(3, 2, 1)
+
+[node name="FragmentBase" type="Node3D" parent="B01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -17.2)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="B01/FragmentBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 0)
+material_override = SubResource("StandardMaterial3D_jofgg")
+radius = 2.0
+sides = 6
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="B01/FragmentBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8500004, 0)
+material_override = SubResource("StandardMaterial3D_mrbwa")
+radius = 2.5
+height = 10.900001
+sides = 6
+
+[node name="B02" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.7, 0, -32)
+
+[node name="Ground01" type="CSGBox3D" parent="B02"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.8000002, 0)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(16, 8.6, 10)
+
+[node name="Ground02" type="CSGBox3D" parent="B02"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.8000002, -16.900002)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(16, 8.6, 10)
+
+[node name="GroundBeam" type="CSGBox3D" parent="B02"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.25, 0.24999972, -8.450001)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(0.5, 0.5, 6.9)
+
+[node name="Obstacle" type="CSGBox3D" parent="B02"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.500004, 1.4999998, -4.000004)
+material_override = SubResource("StandardMaterial3D_h15ai")
+size = Vector3(3, 2, 1)
+
+[node name="Obstacle2" type="CSGBox3D" parent="B02"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5000038, 1.4999998, -4.000004)
+material_override = SubResource("StandardMaterial3D_h15ai")
+size = Vector3(3, 2, 1)
+
+[node name="Obstacle3" type="CSGBox3D" parent="B02"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0499954, 1.4999998, -15.750008)
+material_override = SubResource("StandardMaterial3D_h15ai")
+size = Vector3(2, 2, 2)
+
+[node name="Ground04" type="CSGBox3D" parent="B02"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9749985, 2.0000002, -19.25)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(7.9, 3, 5)
+
+[node name="FragmentBase" type="Node3D" parent="B02"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1500015, -0.05000001, -23.900002)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="B02/FragmentBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 0)
+material_override = SubResource("StandardMaterial3D_jofgg")
+radius = 2.0
+sides = 6
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="B02/FragmentBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8500004, 0)
+material_override = SubResource("StandardMaterial3D_mrbwa")
+radius = 2.5
+height = 10.900001
+sides = 6
+
+[node name="B03" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.4, 0, -32)
+
+[node name="Ground01" type="CSGBox3D" parent="B03"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.8000002, 0)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(16, 8.6, 10)
+
+[node name="Ground02" type="CSGBox3D" parent="B03"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.8000002, -16.900002)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(16, 8.6, 10)
+
+[node name="Ground03" type="CSGBox3D" parent="B03"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.275, -31.050003)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(16, 11.650001, 10)
+
+[node name="GroundBeam" type="CSGBox3D" parent="B03"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.25, 0.24999972, -8.450001)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(0.5, 0.5, 6.9)
+
+[node name="GroundBeam2" type="CSGBox3D" parent="B03"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.25, 0.24999972, -23.974998)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(0.5, 0.5, 4.15)
+
+[node name="GroundBeam3" type="CSGBox3D" parent="B03"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.425003, 0.24999972, -25.774998)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(0.5, 0.5, 1.2)
+
+[node name="GroundBeam4" type="CSGBox3D" parent="B03"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3.5250046, 1.2499998, -25.774998)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(0.5, 1, 1)
+
+[node name="GroundBeam5" type="CSGBox3D" parent="B03"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.5250046, 2.2499998, -25.774998)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(0.5, 1, 1)
+
+[node name="Obstacle2" type="CSGBox3D" parent="B03"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5000038, 1.4999998, -4.000004)
+material_override = SubResource("StandardMaterial3D_h15ai")
+size = Vector3(3, 2, 1)
+
+[node name="Obstacle3" type="CSGBox3D" parent="B03"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.400005, 1.4999998, -15.750008)
+material_override = SubResource("StandardMaterial3D_h15ai")
+size = Vector3(2, 2, 2)
+
+[node name="Obstacle4" type="CSGBox3D" parent="B03"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4500046, 1.4999998, -20.800007)
+material_override = SubResource("StandardMaterial3D_h15ai")
+size = Vector3(2, 2, 2)
+
+[node name="Obstacle5" type="CSGBox3D" parent="B03"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5499954, 4.5499997, -28.325005)
+material_override = SubResource("StandardMaterial3D_h15ai")
+size = Vector3(2, 2, 4.4500003)
+
+[node name="Obstacle6" type="CSGBox3D" parent="B03/Obstacle5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 1.5000001)
+material_override = SubResource("StandardMaterial3D_h15ai")
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="Obstacle7" type="CSGBox3D" parent="B03/Obstacle5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0.50000006)
+material_override = SubResource("StandardMaterial3D_h15ai")
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="Obstacle8" type="CSGBox3D" parent="B03/Obstacle5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -0.49999994)
+material_override = SubResource("StandardMaterial3D_h15ai")
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="Obstacle9" type="CSGBox3D" parent="B03/Obstacle5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -1.5)
+material_override = SubResource("StandardMaterial3D_h15ai")
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="Ground04" type="CSGBox3D" parent="B03"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9749985, 2.0000002, -19.25)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(7.9, 3, 5)
+
+[node name="Ground05" type="CSGBox3D" parent="B03"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9749985, 2.0000002, 2.4500008)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(7.9, 3, 5)
+
+[node name="Ground06" type="CSGBox3D" parent="B03"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9749985, 2.0000002, -2.5499992)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(1.9, 3, 5)
+
+[node name="FragmentBase" type="Node3D" parent="B03"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1500015, -0.05000001, -23.900002)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="B03/FragmentBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 0)
+material_override = SubResource("StandardMaterial3D_jofgg")
+radius = 2.0
+sides = 6
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="B03/FragmentBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8500004, 0)
+material_override = SubResource("StandardMaterial3D_mrbwa")
+radius = 2.5
+height = 10.900001
+sides = 6
