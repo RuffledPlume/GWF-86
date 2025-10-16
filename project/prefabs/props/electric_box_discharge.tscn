@@ -1,0 +1,348 @@
+[gd_scene load_steps=53 format=3 uid="uid://bajrir5sg7554"]
+
+[ext_resource type="Script" uid="uid://bnb70uad3kbid" path="res://scripts/electric_discharge_effect.gd" id="1_4v54i"]
+[ext_resource type="Texture2D" uid="uid://dltgi5ef4uowh" path="res://textures/p_purple.png" id="1_higy6"]
+[ext_resource type="Texture2D" uid="uid://fdtvyqcerwj1" path="res://alphas/ring_thinner.png" id="3_gbdn6"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_y87jv"]
+load_path = "res://.godot/imported/p_orange.png-40acb0248db74195073656054897250f.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gwunc"]
+albedo_texture = SubResource("CompressedTexture2D_y87jv")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_8mbx6"]
+material = SubResource("StandardMaterial3D_gwunc")
+size = Vector3(3, 2, 2)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jdxhh"]
+load_path = "res://.godot/imported/p_orange.png-40acb0248db74195073656054897250f.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i1opr"]
+albedo_texture = SubResource("CompressedTexture2D_jdxhh")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_3wgs1"]
+material = SubResource("StandardMaterial3D_i1opr")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tqhbl"]
+load_path = "res://.godot/imported/p_orange.png-40acb0248db74195073656054897250f.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cy7yr"]
+albedo_texture = SubResource("CompressedTexture2D_tqhbl")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_otti0"]
+material = SubResource("StandardMaterial3D_cy7yr")
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0i1us"]
+load_path = "res://.godot/imported/p_orange.png-40acb0248db74195073656054897250f.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_myjdo"]
+albedo_texture = SubResource("CompressedTexture2D_0i1us")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_mrspo"]
+material = SubResource("StandardMaterial3D_myjdo")
+size = Vector3(0.8, 0.2, 0.2)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1wdb6"]
+load_path = "res://.godot/imported/p_orange.png-40acb0248db74195073656054897250f.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xjvrq"]
+albedo_texture = SubResource("CompressedTexture2D_1wdb6")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_sv3fr"]
+material = SubResource("StandardMaterial3D_xjvrq")
+size = Vector3(0.6, 0.2, 0.2)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xduo3"]
+load_path = "res://.godot/imported/p_orange.png-40acb0248db74195073656054897250f.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fxihj"]
+albedo_texture = SubResource("CompressedTexture2D_xduo3")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_xdf7n"]
+material = SubResource("StandardMaterial3D_fxihj")
+size = Vector3(1, 1, 2.2)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cacia"]
+load_path = "res://.godot/imported/p_orange.png-40acb0248db74195073656054897250f.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x462r"]
+albedo_texture = SubResource("CompressedTexture2D_cacia")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_4naba"]
+material = SubResource("StandardMaterial3D_x462r")
+size = Vector3(1, 1, 3.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sdkg5"]
+albedo_texture = ExtResource("1_higy6")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4v54i"]
+material = SubResource("StandardMaterial3D_sdkg5")
+top_radius = 0.1
+bottom_radius = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gbdn6"]
+top_radius = 0.03
+bottom_radius = 0.03
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_occfy"]
+albedo_texture = ExtResource("1_higy6")
+
+[sub_resource type="SphereMesh" id="SphereMesh_oo5b6"]
+material = SubResource("StandardMaterial3D_occfy")
+radius = 0.3
+height = 0.6
+
+[sub_resource type="TorusMesh" id="TorusMesh_pq2sg"]
+inner_radius = 0.2
+outer_radius = 0.3
+
+[sub_resource type="TorusMesh" id="TorusMesh_x6b6w"]
+inner_radius = 0.3
+outer_radius = 0.4
+
+[sub_resource type="TorusMesh" id="TorusMesh_buxm5"]
+inner_radius = 0.4
+outer_radius = 0.5
+
+[sub_resource type="Curve" id="Curve_upr0q"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.59615386, 0), -0.042751428, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5xvkc"]
+curve = SubResource("Curve_upr0q")
+
+[sub_resource type="Curve" id="Curve_n1ee0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.4102564, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_bbxey"]
+curve = SubResource("Curve_n1ee0")
+
+[sub_resource type="Curve" id="Curve_73vin"]
+_limits = [0.0, 20.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 20), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_e6aih"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_p6j3l"]
+_limits = [0.0, 20.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 20), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_2gda5"]
+curve_x = SubResource("Curve_73vin")
+curve_y = SubResource("Curve_e6aih")
+curve_z = SubResource("Curve_p6j3l")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k4hy8"]
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveXYZTexture_2gda5")
+alpha_curve = SubResource("CurveTexture_5xvkc")
+emission_curve = SubResource("CurveTexture_bbxey")
+sub_emitter_mode = 1
+sub_emitter_frequency = 100.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wwm72"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0.70980394, 0.8666667, 1)
+albedo_texture = ExtResource("3_gbdn6")
+uv1_triplanar_sharpness = 10.196472
+uv2_triplanar_sharpness = 0.01991497
+billboard_keep_scale = true
+grow = true
+point_size = 128.0
+z_clip_scale = 0.94
+stencil_flags = 2
+stencil_color = Color(0.9372549, 0, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_q0egq"]
+material = SubResource("StandardMaterial3D_wwm72")
+
+[sub_resource type="Curve" id="Curve_4v54i"]
+_data = [Vector2(0.7051282, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gbdn6"]
+curve = SubResource("Curve_4v54i")
+
+[sub_resource type="Curve" id="Curve_5wmwu"]
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_33dfe"]
+curve_y = SubResource("Curve_5wmwu")
+
+[sub_resource type="Curve" id="Curve_gbdn6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.17948717, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_occfy"]
+curve = SubResource("Curve_gbdn6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3josu"]
+emission_shape_scale = Vector3(1, 0.1, 1)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 0, 0)
+spread = 0.0
+flatness = 1.0
+directional_velocity_min = 0.9999839
+directional_velocity_max = 0.9999839
+directional_velocity_curve = SubResource("CurveXYZTexture_33dfe")
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 9.49949e-08
+radial_velocity_min = 4.9999776
+radial_velocity_max = 9.999977
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -2.2351742e-06
+radial_accel_max = -2.2351742e-06
+tangential_accel_min = 4.9999976
+tangential_accel_max = 9.999997
+damping_min = 0.5
+damping_max = 0.5
+alpha_curve = SubResource("CurveTexture_gbdn6")
+emission_curve = SubResource("CurveTexture_occfy")
+turbulence_enabled = true
+sub_emitter_mode = 4
+sub_emitter_amount_at_start = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qa3a4"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.3372549, 1, 1, 1)
+billboard_keep_scale = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_isxnk"]
+material = SubResource("StandardMaterial3D_qa3a4")
+size = Vector2(0.1, 0.1)
+
+[node name="ElectricBox_Discharge" type="Node3D"]
+script = ExtResource("1_4v54i")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_8mbx6")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.76, 0)
+mesh = SubResource("BoxMesh_3wgs1")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 1.46, 0)
+mesh = SubResource("BoxMesh_otti0")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 1.46, 0)
+mesh = SubResource("BoxMesh_mrspo")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.15, 1.06, 0)
+mesh = SubResource("BoxMesh_sv3fr")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.74, 0.39999998, 0)
+mesh = SubResource("BoxMesh_xdf7n")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.7252903e-09, 0.39999998, 0)
+mesh = SubResource("BoxMesh_4naba")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.76000005, 0.39999998, 0)
+mesh = SubResource("BoxMesh_xdf7n")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 2.66, 0)
+mesh = SubResource("CylinderMesh_4v54i")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 4.2599998, 0)
+mesh = SubResource("CylinderMesh_gbdn6")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, -0.5, 0, 0.5, 0.8660254, 0.8, 4.22, 0.16)
+mesh = SubResource("CylinderMesh_gbdn6")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D16" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(-1, -4.371139e-08, -7.5710346e-08, 0, 0.8660254, -0.5, 8.742278e-08, -0.5, -0.8660254, 0.8, 4.22, -0.17000002)
+mesh = SubResource("CylinderMesh_gbdn6")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D17" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(-4.371139e-08, -0.5, -0.8660254, 0, 0.8660254, -0.5, 1, -2.1855694e-08, -3.7855173e-08, 0.635, 4.22, -0.005000017)
+mesh = SubResource("CylinderMesh_gbdn6")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D18" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(-4.371139e-08, 0.5, 0.8660254, 0, 0.8660254, -0.5, -1, -2.1855694e-08, -3.7855173e-08, 0.96500003, 4.22, -0.005000003)
+mesh = SubResource("CylinderMesh_gbdn6")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 3.9599996, 0)
+mesh = SubResource("SphereMesh_oo5b6")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 3.56, 0)
+mesh = SubResource("TorusMesh_pq2sg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 3.6599998, 0)
+mesh = SubResource("TorusMesh_x6b6w")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 3.7599998, 0)
+mesh = SubResource("TorusMesh_buxm5")
+skeleton = NodePath("../..")
+
+[node name="Rings" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 4.9, -4.4703484e-08)
+emitting = false
+amount = 3
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.8
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_k4hy8")
+draw_pass_1 = SubResource("PlaneMesh_q0egq")
+
+[node name="Discharge" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 4.9, -4.4703484e-08)
+emitting = false
+amount = 2000
+lifetime = 3.0
+one_shot = true
+explosiveness = 0.98
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_3josu")
+draw_pass_1 = SubResource("PlaneMesh_isxnk")
