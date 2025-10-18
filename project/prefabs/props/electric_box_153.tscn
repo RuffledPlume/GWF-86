@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=3 uid="uid://b058w1k7hrwrw"]
+
+[ext_resource type="Texture2D" uid="uid://k5egrbtqqwyr" path="res://textures/p_orange.png" id="1_qqc15"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g8qyf"]
+albedo_texture = ExtResource("1_qqc15")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_lgju0"]
+material = SubResource("StandardMaterial3D_g8qyf")
+size = Vector3(1.5, 1.5, 1.5)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bjfjg"]
+load_path = "res://.godot/imported/p_orange.png-40acb0248db74195073656054897250f.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ldahq"]
+albedo_texture = SubResource("CompressedTexture2D_bjfjg")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_svdeh"]
+material = SubResource("StandardMaterial3D_ldahq")
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_33ma7"]
+material = SubResource("StandardMaterial3D_ldahq")
+size = Vector3(0.2, 0.6, 0.2)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_b8dr0"]
+load_path = "res://.godot/imported/p_orange.png-40acb0248db74195073656054897250f.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m2ai3"]
+albedo_texture = SubResource("CompressedTexture2D_b8dr0")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_iltv0"]
+material = SubResource("StandardMaterial3D_m2ai3")
+size = Vector3(0.2, 5.8, 0.2)
+
+[node name="ElectricBox_153" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_lgju0")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+mesh = SubResource("BoxMesh_lgju0")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 0)
+mesh = SubResource("BoxMesh_svdeh")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.5, 0)
+mesh = SubResource("BoxMesh_33ma7")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 2.8871e-07, 1.7, 0)
+mesh = SubResource("BoxMesh_iltv0")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("BoxMesh_33ma7")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1.5, 0)
+mesh = SubResource("BoxMesh_33ma7")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_svdeh")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 0)
+mesh = SubResource("BoxMesh_svdeh")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+mesh = SubResource("BoxMesh_lgju0")

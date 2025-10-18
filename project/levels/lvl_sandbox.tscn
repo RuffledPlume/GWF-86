@@ -1,11 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://reb10t3agtfp"]
+[gd_scene load_steps=18 format=3 uid="uid://reb10t3agtfp"]
 
 [ext_resource type="PackedScene" uid="uid://bfu3urw4e1djq" path="res://prefabs/pf_player.tscn" id="1_p4efw"]
 [ext_resource type="LightmapGIData" uid="uid://bpg4d5314ober" path="res://levels/lightmaps/sandbox.lmbake" id="2_75r4t"]
 [ext_resource type="PackedScene" uid="uid://ctlsostfq5ndw" path="res://prefabs/pf_basic_cube.tscn" id="3_vfjr8"]
 [ext_resource type="Texture2D" uid="uid://bjbmq3tun7i37" path="res://textures/p_dark.png" id="4_75r4t"]
-[ext_resource type="Texture2D" uid="uid://k5egrbtqqwyr" path="res://textures/p_orange.png" id="5_vfjr8"]
 [ext_resource type="Texture2D" uid="uid://dvac1yha00r8b" path="res://textures/p_green.png" id="6_sceuq"]
+[ext_resource type="PackedScene" uid="uid://8eo86bfy6elh" path="res://prefabs/elevator.tscn" id="7_jofgg"]
+[ext_resource type="PackedScene" uid="uid://dckdmkqrx142e" path="res://prefabs/props/electric_box_321.tscn" id="8_h15ai"]
+[ext_resource type="PackedScene" uid="uid://1mlh4rbqo8ea" path="res://prefabs/props/electric_box_322.tscn" id="9_p8w46"]
+[ext_resource type="PackedScene" uid="uid://b058w1k7hrwrw" path="res://prefabs/props/electric_box_153.tscn" id="10_p8w46"]
+[ext_resource type="PackedScene" uid="uid://bajrir5sg7554" path="res://prefabs/props/electric_box_discharge.tscn" id="11_newxk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_85hcc"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -24,10 +28,6 @@ glow_enabled = true
 albedo_texture = ExtResource("4_75r4t")
 uv1_triplanar = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sceuq"]
-albedo_texture = ExtResource("5_vfjr8")
-uv1_triplanar = true
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jofgg"]
 albedo_texture = ExtResource("6_sceuq")
 
@@ -35,14 +35,14 @@ albedo_texture = ExtResource("6_sceuq")
 albedo_texture = ExtResource("4_75r4t")
 uv1_triplanar = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h15ai"]
-albedo_texture = ExtResource("5_vfjr8")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_newxk"]
+albedo_texture = ExtResource("4_75r4t")
 uv1_triplanar = true
 
 [node name="Sandbox" type="Node3D"]
 
-[node name="Pf_Player" parent="." instance=ExtResource("1_p4efw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9, 0.48066244, -33.8)
+[node name="Pf_Player" parent="." groups=["Player"] instance=ExtResource("1_p4efw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 110.450005, 2.2806625, -44.6)
 
 [node name="Enviorment" type="Node3D" parent="."]
 
@@ -77,71 +77,120 @@ transform = Transform3D(0.6421993, -0.66384125, 0.38326874, 4.8747356e-08, 0.499
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.7071068, -0.29883626, 0.6408564, 0, 0.9063078, 0.42261827, -0.7071068, -0.29883626, 0.6408564, 14.433952, 10.95445, -24.06605)
+transform = Transform3D(0.7071068, -0.29883626, 0.6408564, 0, 0.9063078, 0.42261827, -0.7071068, -0.29883626, 0.6408564, 114.23398, 10.95445, -39.96605)
 projection = 1
 size = 15.0
 near = 0.001
+
+[node name="B000" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60.400017, -6.25, -35.4)
+
+[node name="Ground07" type="CSGBox3D" parent="B000"]
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(10, 13.5, 10)
+
+[node name="Ground08" type="CSGBox3D" parent="B000"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, -10)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(10, 18, 10)
+
+[node name="Ground09" type="CSGBox3D" parent="B000"]
+transform = Transform3D(1, 0, 0, 0, 0.9659258, -0.25881904, 0, 0.25881904, 0.9659258, -1.75, 10.83, -3.8199997)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(6.5, 0.2, 2.5)
+
+[node name="FragmentBase" type="Node3D" parent="B000"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2999878, 7.6499996, -16.999996)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="B000/FragmentBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 0)
+material_override = SubResource("StandardMaterial3D_jofgg")
+radius = 2.0
+sides = 6
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="B000/FragmentBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8500004, 0)
+material_override = SubResource("StandardMaterial3D_mrbwa")
+radius = 2.5
+height = 10.900001
+sides = 6
+
+[node name="ElectricBox_321" parent="B000" instance=ExtResource("8_h15ai")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0000153, 11.25, -9)
+
+[node name="ElectricBox_322" parent="B000" instance=ExtResource("9_p8w46")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4999847, 6.75, -3.4999962)
+
+[node name="Elevator" parent="B000" instance=ExtResource("7_jofgg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.900013, 6.85, -3.8999977)
+
+[node name="MovePoint" parent="B000/Elevator" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.4, 0)
+
+[node name="CollisionShape3D" parent="B000/Elevator/Area3D" index="0"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 2.4, 0)
+
+[node name="B00" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.000015, -6.25, -35.4)
+
+[node name="Ground07" type="CSGBox3D" parent="B00"]
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(10, 13.5, 10)
+
+[node name="GroundBeam" type="CSGBox3D" parent="B00"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5, -7.5999985)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(0.5, 0.5, 5.2000003)
+
+[node name="Ground08" type="CSGBox3D" parent="B00"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15.099998)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(10, 13.5, 10)
+
+[node name="FragmentBase" type="Node3D" parent="B00"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2999878, 3.45, -22.199997)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="B00/FragmentBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 0)
+material_override = SubResource("StandardMaterial3D_jofgg")
+radius = 2.0
+sides = 6
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="B00/FragmentBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8500004, 0)
+material_override = SubResource("StandardMaterial3D_mrbwa")
+radius = 2.5
+height = 10.900001
+sides = 6
+
+[node name="ElectricBox_323" parent="B00" instance=ExtResource("9_p8w46")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5258789e-05, 6.75, -14.700001)
 
 [node name="B01" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -32)
 
 [node name="Ground01" type="CSGBox3D" parent="B01"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.8000002, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -2.9500003, 0)
 material_override = SubResource("StandardMaterial3D_vfjr8")
-size = Vector3(10, 8.6, 10)
+size = Vector3(10, 10.3, 10)
 
 [node name="Ground02" type="CSGBox3D" parent="B01"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.0500002, -10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -2.0500002, -10)
 material_override = SubResource("StandardMaterial3D_vfjr8")
-size = Vector3(14, 8.5, 10)
+size = Vector3(16, 8.5, 10)
 
 [node name="Ground04" type="CSGBox3D" parent="B01"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.3, -4.3, -17.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3, -4.3, -17.2)
 material_override = SubResource("StandardMaterial3D_vfjr8")
 size = Vector3(2.6000001, 9.6, 24.4)
 
 [node name="Ground03" type="CSGBox3D" parent="B01"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.4, -24.400002)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -2.4, -24.400002)
 material_override = SubResource("StandardMaterial3D_vfjr8")
-size = Vector3(14, 10.8, 10)
-
-[node name="Obstacle" type="CSGBox3D" parent="B01"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-material_override = SubResource("StandardMaterial3D_sceuq")
-size = Vector3(1, 2, 4)
-
-[node name="Obstacle2" type="CSGBox3D" parent="B01"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9, 2.9, -7.799999)
-material_override = SubResource("StandardMaterial3D_sceuq")
-size = Vector3(1.5, 1.5, 1.5)
-
-[node name="Obstacle3" type="CSGBox3D" parent="B01"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7, 2.8999996, -7.799999)
-material_override = SubResource("StandardMaterial3D_sceuq")
-size = Vector3(1.5, 1.5, 1.5)
-
-[node name="Obstacle4" type="CSGBox3D" parent="B01"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 2.9, -7.799999)
-material_override = SubResource("StandardMaterial3D_sceuq")
-size = Vector3(1.5, 1.5, 1.5)
-
-[node name="Obstacle5" type="CSGBox3D" parent="B01"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2, -14.599998)
-material_override = SubResource("StandardMaterial3D_sceuq")
-size = Vector3(3, 2, 1)
-
-[node name="Obstacle6" type="CSGBox3D" parent="B01"]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 3.4, -20.899998)
-material_override = SubResource("StandardMaterial3D_sceuq")
-size = Vector3(3, 2, 1)
-
-[node name="Obstacle7" type="CSGBox3D" parent="B01"]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 3.4, -27.899998)
-material_override = SubResource("StandardMaterial3D_sceuq")
-size = Vector3(3, 2, 1)
+size = Vector3(16, 10.8, 10)
 
 [node name="FragmentBase" type="Node3D" parent="B01"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -17.2)
+transform = Transform3D(0.8660254, 0, 0.5, 0, 1, 0, -0.5, 0, 0.8660254, -9.000001, -0.5, -24.400002)
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="B01/FragmentBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 0)
@@ -155,6 +204,21 @@ material_override = SubResource("StandardMaterial3D_mrbwa")
 radius = 2.5
 height = 10.900001
 sides = 6
+
+[node name="Elevator" parent="B01" instance=ExtResource("7_jofgg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.250001, 0.5500001, -26.350002)
+
+[node name="MovePoint" parent="B01/Elevator" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65, 0)
+
+[node name="ElectricBox_153" parent="B01" instance=ExtResource("10_p8w46")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.25000024, 2.9, -9.450001)
+
+[node name="ElectricBox_324" parent="B01" instance=ExtResource("9_p8w46")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0000005, 2.1000001, -6.699997)
+
+[node name="ElectricBox_325" parent="B01" instance=ExtResource("9_p8w46")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.0000005, 3.0000002, -21.5)
 
 [node name="B02" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.7, 0, -32)
@@ -174,28 +238,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.25, 0.24999972, -8.450001)
 material_override = SubResource("StandardMaterial3D_vfjr8")
 size = Vector3(0.5, 0.5, 6.9)
 
-[node name="Obstacle" type="CSGBox3D" parent="B02"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.500004, 1.4999998, -4.000004)
-material_override = SubResource("StandardMaterial3D_h15ai")
-size = Vector3(3, 2, 1)
-
-[node name="Obstacle2" type="CSGBox3D" parent="B02"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5000038, 1.4999998, -4.000004)
-material_override = SubResource("StandardMaterial3D_h15ai")
-size = Vector3(3, 2, 1)
-
-[node name="Obstacle3" type="CSGBox3D" parent="B02"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0499954, 1.4999998, -15.750008)
-material_override = SubResource("StandardMaterial3D_h15ai")
-size = Vector3(2, 2, 2)
-
 [node name="Ground04" type="CSGBox3D" parent="B02"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9749985, 2.0000002, -19.25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.025001526, 2.0000002, -19.25)
 material_override = SubResource("StandardMaterial3D_vfjr8")
-size = Vector3(7.9, 3, 5)
+size = Vector3(15.900001, 3, 5)
 
 [node name="FragmentBase" type="Node3D" parent="B02"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1500015, -0.05000001, -23.900002)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1500015, -0.10000001, -23.900002)
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="B02/FragmentBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 0)
@@ -209,6 +258,15 @@ material_override = SubResource("StandardMaterial3D_mrbwa")
 radius = 2.5
 height = 10.900001
 sides = 6
+
+[node name="ElectricBox_321" parent="B02" instance=ExtResource("8_h15ai")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0.5, -4)
+
+[node name="ElectricBox_322" parent="B02" instance=ExtResource("8_h15ai")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, -4)
+
+[node name="ElectricBox_326" parent="B02" instance=ExtResource("9_p8w46")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.40000153, 0.5, -15.200001)
 
 [node name="B03" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.4, 0, -32)
@@ -253,60 +311,15 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.52
 material_override = SubResource("StandardMaterial3D_vfjr8")
 size = Vector3(0.5, 1, 1)
 
-[node name="Obstacle2" type="CSGBox3D" parent="B03"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5000038, 1.4999998, -4.000004)
-material_override = SubResource("StandardMaterial3D_h15ai")
-size = Vector3(3, 2, 1)
-
-[node name="Obstacle3" type="CSGBox3D" parent="B03"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.400005, 1.4999998, -15.750008)
-material_override = SubResource("StandardMaterial3D_h15ai")
-size = Vector3(2, 2, 2)
-
-[node name="Obstacle4" type="CSGBox3D" parent="B03"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4500046, 1.4999998, -20.800007)
-material_override = SubResource("StandardMaterial3D_h15ai")
-size = Vector3(2, 2, 2)
-
-[node name="Obstacle5" type="CSGBox3D" parent="B03"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5499954, 4.5499997, -28.325005)
-material_override = SubResource("StandardMaterial3D_h15ai")
-size = Vector3(2, 2, 4.4500003)
-
-[node name="Obstacle6" type="CSGBox3D" parent="B03/Obstacle5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 1.5000001)
-material_override = SubResource("StandardMaterial3D_h15ai")
-size = Vector3(0.5, 0.5, 0.5)
-
-[node name="Obstacle7" type="CSGBox3D" parent="B03/Obstacle5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0.50000006)
-material_override = SubResource("StandardMaterial3D_h15ai")
-size = Vector3(0.5, 0.5, 0.5)
-
-[node name="Obstacle8" type="CSGBox3D" parent="B03/Obstacle5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -0.49999994)
-material_override = SubResource("StandardMaterial3D_h15ai")
-size = Vector3(0.5, 0.5, 0.5)
-
-[node name="Obstacle9" type="CSGBox3D" parent="B03/Obstacle5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -1.5)
-material_override = SubResource("StandardMaterial3D_h15ai")
-size = Vector3(0.5, 0.5, 0.5)
-
 [node name="Ground04" type="CSGBox3D" parent="B03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9749985, 2.0000002, -19.25)
 material_override = SubResource("StandardMaterial3D_vfjr8")
 size = Vector3(7.9, 3, 5)
 
 [node name="Ground05" type="CSGBox3D" parent="B03"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9749985, 2.0000002, 2.4500008)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.0049973, -0.7999997, 3.9900017)
 material_override = SubResource("StandardMaterial3D_vfjr8")
-size = Vector3(7.9, 3, 5)
-
-[node name="Ground06" type="CSGBox3D" parent="B03"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9749985, 2.0000002, -2.5499992)
-material_override = SubResource("StandardMaterial3D_vfjr8")
-size = Vector3(1.9, 3, 5)
+size = Vector3(10, 10, 10)
 
 [node name="FragmentBase" type="Node3D" parent="B03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1500015, -0.05000001, -23.900002)
@@ -323,3 +336,217 @@ material_override = SubResource("StandardMaterial3D_mrbwa")
 radius = 2.5
 height = 10.900001
 sides = 6
+
+[node name="ElectricBox_321" parent="B03" instance=ExtResource("8_h15ai")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, -4)
+
+[node name="ElectricBox_327" parent="B03" instance=ExtResource("9_p8w46")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1, 3.5, -28.000004)
+
+[node name="ElectricBox_154" parent="B03" instance=ExtResource("10_p8w46")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.2000046, 1.2, -16.800003)
+
+[node name="B04" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104.7, 0, -32)
+
+[node name="Ground01" type="CSGBox3D" parent="B04"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.8000002, -5.4)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(16, 8.6, 20)
+
+[node name="Ground02" type="CSGBox3D" parent="B04"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.050003, 2.2999997, -8.275002)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(5.9, 3.7, 14.25)
+
+[node name="Ground04" type="CSGBox3D" parent="B04"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.025001526, -1.9749999, -18.349998)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(5.9, 12.25, 15.95)
+
+[node name="Ground03" type="CSGBox3D" parent="B04"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, -3.8000002, -5.4000015)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(3, 8.6, 6)
+
+[node name="FragmentBase" type="Node3D" parent="B04"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2000046, 0.55000013, 0.8999977)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="B04/FragmentBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 0)
+material_override = SubResource("StandardMaterial3D_jofgg")
+radius = 2.0
+sides = 6
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="B04/FragmentBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8500004, 0)
+material_override = SubResource("StandardMaterial3D_mrbwa")
+radius = 2.5
+height = 10.900001
+sides = 6
+
+[node name="Elevator2" parent="B04" instance=ExtResource("7_jofgg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5499954, 0.5, -8.800003)
+
+[node name="CollisionShape3D" parent="B04/Elevator2/Area3D" index="0"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 2.025, 0)
+
+[node name="ElectricBox_Discharge" parent="B04" instance=ExtResource("11_newxk")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 5.5000076, 4.2, -16.900002)
+
+[node name="ElectricBox_328" parent="B04" instance=ExtResource("9_p8w46")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.099998474, 0.5, -5.300003)
+
+[node name="ElectricBox_329" parent="B04" instance=ExtResource("9_p8w46")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.300003, 0.5, -5.300003)
+
+[node name="ElectricBox_330" parent="B04" instance=ExtResource("9_p8w46")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 6.7000046, 0.5, -5.300003)
+
+[node name="B05" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 163.24998, 0, -30.5)
+
+[node name="Ground01" type="CSGBox3D" parent="B05"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.75, -6.25, -4.9000015)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(10, 13.5, 10)
+
+[node name="Ground05" type="CSGBox3D" parent="B05"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, -3.8000002, -5.4000015)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(16, 8.6, 16)
+
+[node name="Ground02" type="CSGBox3D" parent="B05"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, -2.1000004, -21.400002)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(16, 12, 16)
+
+[node name="Ground03" type="CSGBox3D" parent="B05"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -3.8000002, -38.4)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(16, 8.6, 30)
+
+[node name="Ground06" type="CSGBox3D" parent="B05"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.9900055, 2.3499994, -41.4)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(8, 3.7, 8)
+
+[node name="Ground04" type="CSGBox3D" parent="B05"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -3.8000002, -45.4)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(18, 8.6, 16)
+
+[node name="Building" type="CSGCombiner3D" parent="B05"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0.39999962, -43.9)
+material_override = SubResource("StandardMaterial3D_newxk")
+
+[node name="Ground05" type="CSGBox3D" parent="B05/Building"]
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(16, 17, 19)
+
+[node name="Ground06" type="CSGBox3D" parent="B05/Building"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 5.25, 8)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+operation = 2
+size = Vector3(14.5, 2.5, 3)
+
+[node name="Ground07" type="CSGBox3D" parent="B05/Building"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 6.51001, 5.25, 0.21999359)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+operation = 2
+size = Vector3(17.539999, 2.5, 3)
+
+[node name="GroundBeam" type="CSGBox3D" parent="B05"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.199997, 3.5999997, -30.95)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(0.5, 0.5, 7.1)
+
+[node name="GroundBeam2" type="CSGBox3D" parent="B05"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.800003, 3.5999997, -30.95)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(0.5, 0.5, 7.1)
+
+[node name="GroundBeam5" type="CSGBox3D" parent="B05"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -9.900009, 0.19999957, -1.1500015)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(0.5, 0.5, 4.3)
+
+[node name="GroundBeam6" type="CSGBox3D" parent="B05"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -9.900009, 0.19999957, -8.650002)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(0.5, 0.5, 4.3)
+
+[node name="GroundBeam3" type="CSGBox3D" parent="B05"]
+transform = Transform3D(-4.371139e-08, 0, -1, -0.25881904, 0.9659258, 1.131334e-08, 0.9659258, 0.25881904, -4.222196e-08, -20, 3.9499993, -33.550003)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(1.7, 0.2, 15.900001)
+
+[node name="GroundBeam4" type="CSGBox3D" parent="B05"]
+transform = Transform3D(0.9659258, 0.25881904, 1.489429e-09, -0.25881907, 0.96592593, 1.13133405e-08, 1.4894255e-09, -1.1313341e-08, 1.0000001, -11.399994, 3.9499993, -43.9)
+material_override = SubResource("StandardMaterial3D_vfjr8")
+size = Vector3(1.7, 0.2, 19)
+
+[node name="FragmentBase" type="Node3D" parent="B05"]
+transform = Transform3D(0.8660254, 0, 0.5, 0, 1, 0, -0.5, 0, 0.8660254, 4.050003, -2.4499998, -30.349998)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="B05/FragmentBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 0)
+material_override = SubResource("StandardMaterial3D_jofgg")
+radius = 2.0
+sides = 6
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="B05/FragmentBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8500004, 0)
+material_override = SubResource("StandardMaterial3D_mrbwa")
+radius = 2.5
+height = 10.900001
+sides = 6
+
+[node name="ElectricBox_155" parent="B05" instance=ExtResource("10_p8w46")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.749985, 4.6, -17.150002)
+
+[node name="ElectricBox_156" parent="B05" instance=ExtResource("10_p8w46")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.749985, 4.6, -26.150002)
+
+[node name="ElectricBox_331" parent="B05" instance=ExtResource("8_h15ai")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.549988, 3.8999999, -21.900002)
+
+[node name="ElectricBox_333" parent="B05" instance=ExtResource("8_h15ai")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14.049988, 3.8999999, -21.900002)
+
+[node name="ElectricBox_332" parent="B05" instance=ExtResource("9_p8w46")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.649994, 3.9, -21.900002)
+
+[node name="ElectricBox_334" parent="B05" instance=ExtResource("9_p8w46")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -13.449982, 0.5, -10.400002)
+
+[node name="ElectricBox_335" parent="B05" instance=ExtResource("9_p8w46")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -13.449982, 0.5, -6.9000015)
+
+[node name="ElectricBox_Discharge2" parent="B05" instance=ExtResource("11_newxk")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 7.5500183, 4.2000003, -43.4)
+
+[node name="ElectricBox_336" parent="B05" instance=ExtResource("9_p8w46")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4999847, 0.5, -43.399994)
+
+[node name="ElectricBox_337" parent="B05" instance=ExtResource("9_p8w46")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4999847, 0.5, -45.899994)
+
+[node name="ElectricBox_338" parent="B05" instance=ExtResource("9_p8w46")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4999847, 0.5, -48.399994)
+
+[node name="ElectricBox_339" parent="B05" instance=ExtResource("8_h15ai")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.850021, 0.5, -38.200005)
+
+[node name="ElectricBox_157" parent="B05" instance=ExtResource("10_p8w46")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 18.25003, 1.2, -31.16)
+
+[node name="ElectricBox_158" parent="B05" instance=ExtResource("10_p8w46")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 14.7500305, 1.2, -31.149998)
+
+[node name="ElectricBox_159" parent="B05" instance=ExtResource("10_p8w46")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 11.2500305, 1.2, -31.16)
+
+[editable path="B000/Elevator"]
+[editable path="B01/Elevator"]
+[editable path="B04/Elevator2"]
